@@ -38,7 +38,7 @@ async def successful_payment(message: types.Message):
         print(f"{k} = {v}")
 
     order_number = payment_info['invoice_payload']  # Получаем значение номера заказа из поля invoice_payload
-    await bot.send_message('850931530', f"Покупатель оплатил заказ с номером {order_number}")
+    await bot.send_message('', f"Покупатель оплатил заказ с номером {order_number}")
 
     await bot.send_message(message.chat.id,
                            f'Платеж на сумму {message.successful_payment.total_amount // 100}{message.successful_payment.currency} прошел успешно !!!')
