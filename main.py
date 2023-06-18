@@ -38,7 +38,7 @@ async def successful_payment(message: types.Message):
         print(f"{k} = {v}")
 
     order_number = payment_info['invoice_payload']  # Получаем значение номера заказа из поля invoice_payload
-    await bot.send_message('', f"Покупатель оплатил заказ с номером {order_number}")
+    await bot.send_message('850931530', f"Покупатель оплатил заказ с номером {order_number}")
 
     await bot.send_message(message.chat.id,
                            f'Платеж на сумму {message.successful_payment.total_amount // 100}{message.successful_payment.currency} прошел успешно !!!')
@@ -95,7 +95,16 @@ async def process_order_number(message: types.Message):
                             f"Имя: {order_info['recipient_name']}\n" \
                             f"Страна: {order_info['country']}\n" \
                             f"Номер телефона: ****{order_info['mobile_phone']}\n" \
-                            f"Сумма: {order_info['total']} ₽ \n" \
+                            f"Сумма: {order_info['total']} ₽\n"
+
+            if order_info['DEVIL'] > 0:
+                response_text += f"Футболка DEVIL: {order_info['DEVIL']} шт.\n"
+
+            if order_info['BONES'] > 0:
+                response_text += f"Футболка BONES: {order_info['BONES']} шт.\n"
+
+            if order_info['LOVERS'] > 0:
+                response_text += f"Футболка LOVERS: {order_info['LOVERS']} шт.\n"
 
             keyboard = InlineKeyboardMarkup(row_width=1)
             keyboard.add(InlineKeyboardButton("Оплатить заказ", callback_data=f"pay_{order_number}"))
@@ -107,6 +116,7 @@ async def process_order_number(message: types.Message):
     else:
         response_text = "Ошибка получения информации о заказе"
         await message.answer(response_text)
+
 
 @dispatcher.callback_query_handler(lambda c: c.data.startswith('pay_'))
 async def process_payment(callback_query: types.CallbackQuery):
