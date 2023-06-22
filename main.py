@@ -84,7 +84,7 @@ async def process_order_number(message: types.Message):
         await message.answer(response_text)
         return
 
-#f"Сумма в рублях: {order_info['total']}\n"
+
 #f"Сумма в bitcoin: {order_info['bitcoin_amount']}\n" \
 #f"Метод оплаты: {order_info['payment_method']}\n" \
     response = requests.get(f'http://127.0.0.1:8000/get_order_info/{order_number}/')
@@ -132,10 +132,6 @@ async def process_payment(callback_query: types.CallbackQuery):
                 description='Оформление покупки',
                 provider_token=config.PAYMENTS_TOKEN,
                 currency='rub',
-                photo_url='https://klike.net/uploads/posts/2020-06/1591254382_2.jpg',
-                photo_width=416,
-                photo_height=234,
-                photo_size=416,
                 is_flexible=False,
                 prices=[price],
                 start_parameter='order_buy',
