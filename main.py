@@ -10,7 +10,7 @@ from aiogram.utils import executor
 import config
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
-# Включаем логирование для получения информации об ошибках
+# Включаем логирование для получения информации обошибках
 logging.basicConfig(level=logging.INFO)
 
 # Создаем объект бота С config.TOKEN я импортировал из файла config значение TOKEN
